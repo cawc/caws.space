@@ -1,0 +1,7 @@
+{% extends "base.j2" %}
+
+{% block app_content %}
+    <h1>Idea!</h1>
+    <h2>{{ idea }}</h2>
+    <p>Or manage ideas here :3 <a href="{{ url_for('idea.ideas') }}">Idea Manager</a></p>
+{% endblock %}

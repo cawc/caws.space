@@ -1,0 +1,9 @@
+{% extends "base.j2" %}
+
+{% block app_content %}
+<ul>
+{% for user in users %}
+    <li>{{ user.id }} <a href='#'>{{ user.username }}</a></li>
+{% endfor %}
+</ul>
+{% endblock app_content %}

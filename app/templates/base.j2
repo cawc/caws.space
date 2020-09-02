@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+    {% if title %}
+        {{ title }} - IdeaApp
+    {% else %}
+        IdeaApp
+    {% endif %}
+{% endblock title %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+    {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('idea.index') }}">Ideas</a></li>
+        {% if current_user.is_admin %}
+            <li><a href="{{ url_for('admin.index') }}">Admin Panel</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+    {% else %}
+        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% endif %}
+    </ul>
+</nav>
+{% endblock navbar %}
+
+{% block content %}
+<div class="container">
+    {% with messages=get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block app_content %}{% endblock app_content %}
+</div>
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock scripts %}

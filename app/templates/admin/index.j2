@@ -1,0 +1,9 @@
+{% extends "base.j2" %}
+
+{% block app_content %}
+    <h1>Admin page</h1>
+    <ul>
+        <li><a href="{{ url_for('admin.usermanagement') }}">Manage users</a></li>
+        <li><a href="{{ url_for('admin.register') }}">Register user</a></li>
+    </ul>
+{% endblock %}
