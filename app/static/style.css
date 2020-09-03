@@ -1,0 +1,61 @@
+/* ---- particles.js container ---- */
+canvas {
+	display: block;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+/* ---- Styles ---- */
+
+.grid-wrapper {
+	position: absolute;
+	width: 100vw;
+    height: 100vh;
+	display: grid;
+	grid-template-columns: 20% 60% auto;
+	grid-template-rows: 33% 34% auto;
+}
+
+.titlebox {
+	grid-row: 2;
+	grid-column: 2;
+	display: grid;
+	grid-template-rows: 50% auto;
+
+	color: red;
+	font-family: "Courier New", Courier, monospace;
+}
+
+.title {
+	grid-row: 1;
+	justify-self: center;
+	align-self: center;
+	
+	/* font-weight: bold; */
+	font-size: 3em;
+}
+
+.links {
+	grid-row: 2;
+	justify-self: center;
+	align-self: center;
+}
+
+.links > ul {
+	list-style: none;
+}
+
+.links > li {
+	/* display: inline; */
+	padding: 1em;
+	font-size: 1.5em;
+}

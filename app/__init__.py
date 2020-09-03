@@ -43,6 +43,9 @@ def initialize_extensions(app):
 
 def register_blueprints(app):
     """Register blueprints to an app"""
+    from app.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp)
 
@@ -50,4 +53,4 @@ def register_blueprints(app):
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
     from app.idea import bp as idea_bp
-    app.register_blueprint(idea_bp)
+    app.register_blueprint(idea_bp, url_prefix='/idea')
