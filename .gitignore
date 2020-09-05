@@ -6,3 +6,5 @@ __pycache__/
 instance/
 *.out
 venv/
+wsgi.ini
+
