@@ -7,5 +7,3 @@ instance/
 *.out
 venv/
 wsgi.ini
-migrations/
-
