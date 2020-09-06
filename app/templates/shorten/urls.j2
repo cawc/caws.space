@@ -1,0 +1,27 @@
+{% extends "base.j2" %}
+
+{% block app_content %}
+
+<a href="{{ url_for('idea.add_idea') }}">Create new URL</a>
+
+<h1>URL list</h1>
+<table class='table'>
+<thead>
+    <tr>
+        <th scope='col'>Token</th>
+        <th scope='col'>URL</th>
+        <th scope='col'>Clicks</th>
+    </tr>
+</thead>
+<tbody>
+    {% for url in urls %}
+        <tr>
+            <td>{{ url.token }}</td>
+            <td>{{ url.url }}</td>
+            <td>{{ url.clicks }}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+{% endblock app_content %}

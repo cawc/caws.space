@@ -15,6 +15,7 @@
         <li><a href="{{ url_for('idea.index') }}">Ideas</a></li>
         {% if current_user.is_admin %}
             <li><a href="{{ url_for('admin.index') }}">Admin Panel</a></li>
+            <li><a href="{{ url_for('shorten.urls') }}">URL Manager</a></li>
         {% endif %}
         <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
     {% else %}

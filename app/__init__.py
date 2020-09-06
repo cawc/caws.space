@@ -3,9 +3,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 # Create extension objects etc
 db = SQLAlchemy()
+migrate = Migrate()
 bootstrap = Bootstrap()
 login = LoginManager()
 login.login_view = 'auth.login'
@@ -38,6 +40,7 @@ def create_app(config='config.py'):
 def initialize_extensions(app):
     """Link extensions to an app"""
     db.init_app(app)
+    migrate.init_app(app, db)
     bootstrap.init_app(app)
     login.init_app(app)
 
@@ -54,3 +57,6 @@ def register_blueprints(app):
 
     from app.idea import bp as idea_bp
     app.register_blueprint(idea_bp, url_prefix='/idea')
+
+    from app.shorten import bp as shorten_bp
+    app.register_blueprint(shorten_bp)
