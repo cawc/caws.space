@@ -21,9 +21,6 @@ def create_url():
     form = ShortenURLForm()
 
     if form.validate_on_submit():
-        if URL.query.get(form.token.data) is not None:
-            flash(f'Token {form.token.data} is already in use')
-            return redirect(url_for('shorten.create_url'))
         shortened_url = URL(token=form.token.data, url=form.url.data)
         db.session.add(shortened_url)
         db.session.commit()
