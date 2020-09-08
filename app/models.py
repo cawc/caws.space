@@ -34,6 +34,6 @@ class Idea(db.Model):
 
 class URL(db.Model):
     """A shortened URL"""
-    token = db.Column(db.String(128), primary_key=True)
+    token = db.Column(db.String(128), primary_key=True, index=True)
     url = db.Column(db.String(1024), nullable=False)
     clicks = db.Column(db.Integer, default=0)
