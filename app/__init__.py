@@ -13,7 +13,7 @@ login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Access denied'
 
-def create_app(config='config.py'):
+def create_app(config='config-postgres.py'):
     """
     Application factory
 
