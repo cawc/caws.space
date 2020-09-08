@@ -20,6 +20,7 @@ class Idea(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False)
     desc = db.Column(db.String(512), nullable=False)
+    category = db.Column(db.String(128))
     done = db.Column(db.Boolean, nullable=False, default=False)
 
     @property
