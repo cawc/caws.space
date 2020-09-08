@@ -1,6 +1,8 @@
 from flask import render_template, url_for, redirect, flash
 from flask_login import login_required
 
+from sqlalchemy import func
+
 from app import db
 
 from app.idea import bp
@@ -15,11 +17,16 @@ import random
 def index():
     ideas = Idea.query.filter_by(done=False).all()
 
+    categories = []
+
+    for value in Idea.query.distinct(func.lower(Idea.category)).filter_by(done=False):
+        categories.append(value.category)
+
     if len(ideas) < 1:
-        return render_template('idea/index.j2', idea='No ideas available! Try adding some :)')
+        return render_template('idea/index.j2', idea='No ideas available! Try adding some :)', categories=categories)
     else:
         idea = random.choice(ideas)
-        return render_template('idea/index.j2', idea=f'Let\'s try: {idea.name}!')
+        return render_template('idea/index.j2', idea=f'Let\'s try: {idea.name}!', categories=categories)
 
 @bp.route('/ideas')
 @login_required
@@ -27,6 +34,17 @@ def ideas():
     ideas = Idea.query.filter_by(done=False).all()
     ideas_done = Idea.query.filter_by(done=True).all()
     return render_template('idea/ideas.j2', ideas=ideas, ideas_done=ideas_done)
+
+@bp.route('/random/<category>')
+@login_required
+def random_from_category(category):
+    ideas = Idea.query.filter(Idea.done==False, func.lower(Idea.category)==func.lower(category)).all()
+
+    if len(ideas) < 1:
+        return render_template('idea/random_category.j2', idea=f'No ideas for category "{category.title()}" available! Try adding some :)')
+    else:
+        idea = random.choice(ideas)
+        return render_template('idea/random_category.j2', idea=f'[{category.title()}] Let\'s try: {idea.name}!')
 
 @bp.route('/ideas/<idea_id>')
 @login_required

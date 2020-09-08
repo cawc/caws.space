@@ -3,5 +3,10 @@
 {% block app_content %}
     <h1>Idea!</h1>
     <h2>{{ idea }}</h2>
-    <p><a href="{{ url_for('idea.ideas') }}">Idea Manager</a></p>
+    <ul>
+    {% for category in categories %}
+        <li><a class="btn btn-default" href="{{ url_for('idea.random_from_category', category=category) }}">Filter by {{category|title}}</a></li>
+    {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('idea.ideas') }}" class="btn btn-default">Idea Manager</a></p>
 {% endblock %}
