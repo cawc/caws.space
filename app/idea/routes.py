@@ -46,11 +46,26 @@ def random_from_category(category):
         idea = random.choice(ideas)
         return render_template('idea/random_category.j2', idea=f'[{category.title()}] Let\'s try: {idea.name}!')
 
-@bp.route('/ideas/<idea_id>')
+@bp.route('/ideas/<idea_id>', methods=['GET', 'POST'])
 @login_required
 def idea(idea_id):
     idea = Idea.query.get_or_404(idea_id)
-    return render_template('idea/idea.j2', idea=idea)
+    form = IdeaForm(obj=idea)
+
+    if form.validate_on_submit():
+        # TODO make this dynamic
+        idea.name = form.name.data
+        idea.desc = form.desc.data
+        idea.category = form.category.data
+        idea.done = form.done.data
+
+        db.session.add(idea)
+        db.session.commit()
+
+        flash(f'The changes to idea "{idea.name}" has been saved!')
+        return redirect(url_for('idea.ideas'))
+
+    return render_template('form_template.j2', form=form)
 
 @login_required
 @bp.route('/ideas/add', methods=['GET', 'POST'])

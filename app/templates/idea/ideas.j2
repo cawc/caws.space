@@ -17,7 +17,7 @@
 <tbody>
     {% for idea in ideas %}
         <tr>
-            <td>{{ idea.name }}</td>
+            <td><a href="{{ url_for('idea.idea', idea_id=idea.id) }}">{{ idea.name }}</a></td>
             <td>{{ idea.desc }}</td>
             <td>{{ idea.category|title }}</td>
             <td><a href="{{ url_for('idea.toggledone', idea_id=idea.id) }}">Finished!</a></td>
@@ -40,7 +40,7 @@
 <tbody>
     {% for idea in ideas_done %}
         <tr>
-            <td>{{ idea.name }}</td>
+            <td><a href="{{ url_for('idea.idea', idea_id=idea.id) }}">{{ idea.name }}</a></td>
             <td>{{ idea.desc }}</td>
             <td>{{ idea.category|title }}</td>
             <td><a href="{{ url_for('idea.toggledone', idea_id=idea.id) }}">Pls put it back</a></td>
