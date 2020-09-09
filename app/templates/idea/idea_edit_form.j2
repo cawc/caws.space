@@ -1,0 +1,11 @@
+{% extends "base.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+            <a class="btn btn-danger" href="{{ url_for('idea.delete_idea_confirmation', idea_id=idea.id) }}">Delete</a> 
+        </div>
+    </div>
+{% endblock app_content %}

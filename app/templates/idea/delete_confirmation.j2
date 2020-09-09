@@ -1,0 +1,10 @@
+{% extends "base.j2" %}
+
+{% block app_content %}
+    <h1>Confirm Deletion</h1>
+    <h2>{{ idea.name }}</h2>
+    <p>
+    <a class="btn btn-danger" href="{{ url_for('idea.delete_idea', idea_id=idea.id) }}">Delete</a> 
+    <a class="btn btn-default" href="{{ url_for('idea.idea', idea_id=idea.id) }}">No! Take me back!</a> 
+    </p>
+{% endblock %}

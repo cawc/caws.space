@@ -46,7 +46,7 @@ def random_from_category(category):
         idea = random.choice(ideas)
         return render_template('idea/random_category.j2', idea=f'[{category.title()}] Let\'s try: {idea.name}!')
 
-@bp.route('/ideas/<idea_id>', methods=['GET', 'POST'])
+@bp.route('/ideas/<idea_id>/edit', methods=['GET', 'POST'])
 @login_required
 def idea(idea_id):
     idea = Idea.query.get_or_404(idea_id)
@@ -65,7 +65,25 @@ def idea(idea_id):
         flash(f'The changes to idea "{idea.name}" has been saved!')
         return redirect(url_for('idea.ideas'))
 
-    return render_template('form_template.j2', form=form)
+    return render_template('idea/idea_edit_form.j2', idea=idea, form=form)
+
+@bp.route('/ideas/<idea_id>/deleteconfirmation')
+@login_required
+def delete_idea_confirmation(idea_id):
+    idea = Idea.query.get_or_404(idea_id)
+
+    return render_template('idea/delete_confirmation.j2', idea=idea)
+
+@bp.route('/ideas/<idea_id>/delete')
+@login_required
+def delete_idea(idea_id):
+    idea = Idea.query.get_or_404(idea_id)
+
+    db.session.delete(idea)
+    db.session.commit()
+    flash('Idea deleted.')
+
+    return redirect(url_for('idea.ideas'))
 
 @login_required
 @bp.route('/ideas/add', methods=['GET', 'POST'])
